@@ -1,0 +1,154 @@
+
+1) создаем файл package.json
+npm init
+
+https://webpack.js.org/guides/installation
+
+2) устанавливаем локально webpack
+npm install --save-dev webpack webpack-cli
+
+3) Создание папок src, dist. Создание файла webpack.config.js
+
+4) содержимое файла webpack.config.js
+
+const path = require('path')
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist')
+  }
+}
+
+5) запуск в консоли
+webpack
+
+6) в случае ошибки в 5 пункте устанавливаем webpack глобально
+npm i -g webpack webpack-cli
+
+7) запуск кода в консоли
+node dist/bundle.js
+
+----------------------------------------------------
+
+8) сборка в режиме разработки
+webpack --mode development
+
+9) создание скриптов в package.json
+
+"scripts": {
+  "dev": "webpack --mode development",
+  "build": "webpack --mode production",
+  "dev:watch": "webpack --mode development --watch"
+},
+
+10) в src: папка modules; в ней - файлы: app.service.js, config.js, header.component.js
+
+
+11) работа с несколькими js файлами (export / import)
+
+export const config = {
+  key: '123456'
+}
+
+import {config} from './modules/config'
+
+12) работа с несколькими js файлами (export default)
+
+export default class AppService {
+  constructor(text) {
+    this.text = text
+  }
+
+  log() {
+    console.log(`[App service]: ${this.text}`)
+  }
+}
+
+import AppService from './modules/app.service'
+
+12) работа с несколькими js файлами (import)
+
+import './modules/header.component'
+
+------------------------------------------------------------
+
+13) установка сторонней библиотеки
+
+npm install --save jquery
+
+------------------------------------------------------------
+
+14) работа со стилями
+
+npm install --save-dev css-loader
+npm install style-loader --save-dev
+
+module: {
+  rules: [
+    {
+      test: /\.css$/,
+      use: ['style-loader', 'css-loader'],
+    },
+  ],
+},
+
+import css from './css/index.css';
+
+---------------------------------------------------------------
+
+15) стили в отдельном файле
+
+npm install --save-dev mini-css-extract-plugin
+
+16) минимизация файла стилей
+
+npm install --save-dev optimize-css-assets-webpack-plugin
+
+17) минимизация js
+
+npm install uglifyjs-webpack-plugin --save-dev
+
+------------------------------------------------------------------
+
+18) dev-server
+
+npm install -D webpack-dev-server
+
+devServer: {
+  contentBase: path.resolve(__dirname, 'dist'),
+  port: 4200
+},
+
+------------------------------------------------------------------
+
+19) babel
+
+https://babeljs.io/docs/en/usage
+
+npm install --save-dev @babel/core @babel/cli @babel/preset-env
+
+npm install --save @babel/polyfill
+
+npm install -D babel-loader
+
+-------------------------------------------------------------------
+
+20) препроцессор less
+
+npm install less-loader less --save-dev
+
+21) scss (sass)
+
+npm install sass-loader node-sass --save-dev
+
+-------------------------------------------------------------------
+
+22) react jsx
+
+npm i -S react react-dom
+
+https://babeljs.io/docs/en/babel-preset-react#docsNav
+
+npm install --save-dev @babel/preset-react
